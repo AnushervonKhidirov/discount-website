@@ -1,0 +1,28 @@
+.rating {
+  display: grid;
+  gap: 0.25em;
+}
+
+.rating_start_wrapper {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  align-items: center;
+  gap: 0.75em;
+}
+
+.rating_message {
+  font-size: 1em;
+}
+
+.rating_start {
+  color: #ff9300;
+  font-size: 1.25em;
+}
+
+.rating_reviews {
+  font-size: 0.9em;
+}
+
+.rating_start > li:not(:last-child) {
+  margin-inline-end: 0.3em !important;
+}

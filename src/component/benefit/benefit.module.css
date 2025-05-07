@@ -1,0 +1,25 @@
+.benefit_wrapper > div {
+  display: grid;
+  grid-template-areas:
+    'company bank'
+    'benefit benefit'
+    'rating rating';
+  grid-template-columns: 1fr max-content;
+  gap: 1em;
+}
+
+.company_header {
+  grid-area: company;
+}
+
+.bank_header {
+  grid-area: bank;
+}
+
+.benefit {
+  grid-area: benefit;
+}
+
+.rating {
+  grid-area: rating;
+}
