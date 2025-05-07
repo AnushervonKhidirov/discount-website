@@ -13,9 +13,29 @@ type MenuItem = Required<MenuProps>['items'][number];
 
 const menuItems: MenuItem[] = [
   {
-    label: <NavLink to={Page.Home}>Home</NavLink>,
+    label: (
+      <NavLink to={Page.Home} reloadDocument>
+        All
+      </NavLink>
+    ),
     key: getFromUrl(Page.Home),
-  }
+  },
+  {
+    label: (
+      <NavLink to={Page.Discount} reloadDocument>
+        Discounts
+      </NavLink>
+    ),
+    key: getFromUrl(Page.Discount),
+  },
+  {
+    label: (
+      <NavLink to={Page.Cashback} reloadDocument>
+        Cashback
+      </NavLink>
+    ),
+    key: getFromUrl(Page.Cashback),
+  },
 ];
 
 function getFromUrl(url: string) {
