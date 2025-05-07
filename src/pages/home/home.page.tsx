@@ -58,7 +58,7 @@ const benefits: TBenefit[] = [
 
 const HomePage = () => {
   return (
-    <Grid size='medium'>
+    <Grid>
       {benefits.map(benefit => (
         <Benefit {...benefit} key={benefit.id} />
       ))}

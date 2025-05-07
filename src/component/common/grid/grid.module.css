@@ -4,14 +4,53 @@
   gap: 1em;
 }
 
-.grid.small {
-  --columns: 4;
+@media screen and (min-width: 769px) {
+  .grid.xSmall {
+    --columns: 5;
+  }
+
+  .grid.small {
+    --columns: 4;
+  }
+
+  .grid.medium {
+    --columns: 3;
+  }
+
+  .grid.large {
+    --columns: 2;
+  }
 }
 
-.grid.medium {
-  --columns: 3;
+@media screen and (min-width: 426px) and (max-width: 768px) {
+  .grid.xSmall {
+    --columns: 4;
+  }
+
+  .grid.small {
+    --columns: 3;
+  }
+
+  .grid.medium {
+    --columns: 2;
+  }
+
+  .grid.large {
+    --columns: 1;
+  }
 }
 
-.grid.large {
-  --columns: 2;
+@media screen and (max-width: 425px) {
+  .grid.xSmall {
+    --columns: 3;
+  }
+
+  .grid.small {
+    --columns: 2;
+  }
+
+  .grid.medium,
+  .grid.large {
+    --columns: 1;
+  }
 }
