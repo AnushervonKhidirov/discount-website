@@ -36,6 +36,14 @@ const menuItems: MenuItem[] = [
     ),
     key: getFromUrl(Page.Cashback),
   },
+  {
+    label: (
+      <NavLink to={Page.PromoCode} reloadDocument>
+        Promo codes
+      </NavLink>
+    ),
+    key: getFromUrl(Page.PromoCode),
+  },
 ];
 
 function getFromUrl(url: string) {
