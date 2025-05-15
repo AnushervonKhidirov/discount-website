@@ -19,6 +19,8 @@ export const requestWithRefresh = async <T>(
 
         const { refreshToken } = cookieService.get<Token>(['refreshToken']);
         if (!refreshToken) {
+          cookieService.delete(['accessToken', 'refreshToken']);
+
           throw new HttpError({
             statusCode: 401,
             error: 'Unauthorized',
@@ -27,7 +29,10 @@ export const requestWithRefresh = async <T>(
         }
 
         const [tokens, tokenErr] = await authService.refreshToken(refreshToken);
-        if (tokenErr) throw tokenErr;
+        if (tokenErr) {
+          cookieService.delete(['accessToken', 'refreshToken']);
+          throw tokenErr;
+        }
 
         cookieService.set(tokens);
 
