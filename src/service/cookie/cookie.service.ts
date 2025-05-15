@@ -24,6 +24,12 @@ export class CookieService {
     return <Cookie<T>>cookie;
   }
 
+  delete(names: string[]) {
+    names.forEach(name => {
+      document.cookie = `${name}=; Max-Age=0;`;
+    });
+  }
+
   deleteAll() {
     const cookieArr = document.cookie.replaceAll(' ', '').split(';');
 
