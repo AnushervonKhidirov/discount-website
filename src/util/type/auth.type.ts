@@ -3,7 +3,13 @@ export type Token = {
   refreshToken: string;
 };
 
-export type LoginData = {
+export type LogInData = {
   username: string;
   password: string;
+};
+
+export type SignUpData = {
+  username: string;
+  password: string;
+  repeat_password: string;
 };

@@ -10,3 +10,9 @@ export type LimitOptions = {
 };
 
 export type FindOptions<T> = Partial<{ where: Partial<T> } & LimitOptions>;
+
+export type HttpExceptionInstance = {
+  statusCode: number;
+  message: string | string[];
+  error?: string;
+};

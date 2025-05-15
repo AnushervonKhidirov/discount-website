@@ -3,7 +3,7 @@ import type { Bank } from './bank.type';
 
 export type Benefit = {
   id: number;
-  type: 'DISCOUNT' | 'CASHBACK';
+  type: BenefitType;
   size: number;
   about: string | null;
   archived: boolean;
@@ -16,3 +16,9 @@ export type Benefit = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export enum BenefitType {
+  DISCOUNT = 'DISCOUNT',
+  CASHBACK = 'CASHBACK',
+  PROMO_CODE = 'PROMO_CODE',
+}
