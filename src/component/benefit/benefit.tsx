@@ -1,9 +1,10 @@
 import type { FC } from 'react';
 import type { AdditionalProps } from '@type/common.type';
-import type { Cashback, Benefit as TBenefit } from '@type/benefit.type';
+import type { Benefit as TBenefit } from '@type/benefit.type';
+import { isCashback } from '@type/benefit.type';
 
 import dayjs from 'dayjs';
-import { Card } from 'antd/es';
+import { Card, Tag } from 'antd/es';
 import Rating from '@component/common/rating/rating';
 
 import classNames from 'classnames';
@@ -12,6 +13,10 @@ import classes from './benefit.module.css';
 const Benefit: FC<TBenefit> = benefit => {
   return (
     <Card className={classes.benefit_wrapper}>
+      <Tag className={classes.benefit_type} color="success">
+        {benefit.type.replaceAll('_', ' ')}
+      </Tag>
+
       <NameOrLogo
         className={classes.company_header}
         name={benefit.company.name}
@@ -29,7 +34,7 @@ const Benefit: FC<TBenefit> = benefit => {
       <div className={classes.benefit}>
         <BenefitText {...benefit} />
         <div>
-          C {dayjs(benefit.startAt).format('DD/MM/YYYY')} до
+          C {dayjs(benefit.startAt).format('DD/MM/YYYY')} по{' '}
           {dayjs(benefit.endAt).format('DD/MM/YYYY')}
         </div>
       </div>
@@ -67,10 +72,5 @@ const BenefitText: FC<TBenefit> = benefit => {
 
   return <div>Скидки до {benefit.size}%</div>;
 };
-
-function isCashback(benefit: TBenefit): benefit is Cashback {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return (benefit as any).bank;
-}
 
 export default Benefit;

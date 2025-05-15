@@ -1,11 +1,17 @@
 .benefit_wrapper > div {
   display: grid;
   grid-template-areas:
+    'benefit_type benefit_type'
     'company bank'
     'benefit benefit'
     'rating rating';
   grid-template-columns: 1fr max-content;
-  gap: 1em;
+  gap: 1rem;
+}
+
+.benefit_wrapper > div::before,
+.benefit_wrapper > div::after {
+  display: none !important;
 }
 
 .company_header {
@@ -22,4 +28,11 @@
 
 .rating {
   grid-area: rating;
+}
+
+.benefit_type {
+  grid-area: benefit_type;
+  justify-self: self-end;
+  margin: 0;
+  cursor: default;
 }
