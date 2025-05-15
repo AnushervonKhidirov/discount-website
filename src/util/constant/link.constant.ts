@@ -2,5 +2,7 @@ export enum Page {
   Home = '/',
   Discount = '/discounts',
   Cashback = '/cashback',
-  Login = '/log-in',
+  PromoCode = '/promo-codes',
+  LogIn = '/log-in',
+  SignUp = '/sign-up',
 }
