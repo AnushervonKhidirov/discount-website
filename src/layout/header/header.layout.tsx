@@ -27,6 +27,7 @@ const HeaderLayout = () => {
 
   useEffect(() => {
     if (accessToken) getUserInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accessToken]);
 
   return (

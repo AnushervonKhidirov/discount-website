@@ -14,11 +14,11 @@ type MenuItem = Required<MenuProps>['items'][number];
 const menuItems: MenuItem[] = [
   {
     label: (
-      <NavLink to={Page.Home} reloadDocument>
+      <NavLink to={Page.Promotion} reloadDocument>
         All
       </NavLink>
     ),
-    key: getFromUrl(Page.Home),
+    key: getFromUrl(Page.Promotion),
   },
   {
     label: (
@@ -47,7 +47,7 @@ const menuItems: MenuItem[] = [
 ];
 
 function getFromUrl(url: string) {
-  return url.replaceAll('/', ' ').trim().split(' ')[0];
+  return url.split('?')[0];
 }
 
 const Navigation: FC<AdditionalProps> = ({ className }) => {

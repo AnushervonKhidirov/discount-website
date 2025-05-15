@@ -1,4 +1,4 @@
-import type { Benefit as TBenefit } from '@type/benefit.type';
+import type { Promotion } from '@type/promotion.type';
 import type { ReturnPromiseWithErr } from '@type/return-with-error.type';
 import type { HttpExceptionInstance, FindOptions } from '@type/common.type';
 
@@ -8,11 +8,11 @@ import { HttpError } from '@error/http.error';
 import { isHttpException, returnError } from '@helper/response.helper';
 import { queryBuilder } from '@helper/query.helper';
 
-export class BenefitService {
-  async get(id: number): ReturnPromiseWithErr<TBenefit> {
+export class PromotionService {
+  async get(id: number): ReturnPromiseWithErr<Promotion> {
     try {
-      const { data } = await axios.get<TBenefit | HttpExceptionInstance>(
-        Endpoint.Benefit.replace(':id', id.toString()),
+      const { data } = await axios.get<Promotion | HttpExceptionInstance>(
+        Endpoint.Promotion.replace(':id', id.toString()),
         {
           validateStatus: () => true,
         },
@@ -32,12 +32,12 @@ export class BenefitService {
     }
   }
 
-  async getAll(options?: FindOptions<TBenefit>): ReturnPromiseWithErr<TBenefit[]> {
+  async getAll(options?: FindOptions<Promotion>): ReturnPromiseWithErr<Promotion[]> {
     const queries = queryBuilder(options);
 
     try {
-      const { data } = await axios.get<TBenefit[] | HttpExceptionInstance>(
-        Endpoint.Benefits + queries,
+      const { data } = await axios.get<Promotion[] | HttpExceptionInstance>(
+        Endpoint.Promotions + queries,
         {
           validateStatus: () => true,
         },

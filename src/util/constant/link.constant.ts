@@ -1,8 +1,9 @@
 export enum Page {
   Home = '/',
-  Discount = '/discounts',
-  Cashback = '/cashback',
-  PromoCode = '/promo-codes',
+  Promotion = '/promotions',
+  Discount = '/promotions/discounts',
+  Cashback = '/promotions/cashback',
+  PromoCode = '/promotions/promo-codes',
   LogIn = '/log-in',
   SignUp = '/sign-up',
 }

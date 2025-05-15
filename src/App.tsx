@@ -1,9 +1,9 @@
 import '@ant-design/v5-patch-for-react-19';
 import { BrowserRouter, Route, Routes } from 'react-router';
 
-import { BenefitType } from '@type/benefit.type';
+import { PromotionType } from '@type/promotion.type';
 import HeaderLayout from '@layout/header/header.layout';
-import BenefitPage from '@pages/benefit/benefit.page';
+import PromotionPage from '@pages/promotion/promotion.page';
 import LogInPage from '@pages/log-in/log-in.page';
 import SignUpPage from '@pages/sign-up/sign-up.page';
 
@@ -14,10 +14,13 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<HeaderLayout />}>
-          <Route path={Page.Home} element={<BenefitPage />} />
-          <Route path={Page.Discount} element={<BenefitPage type={BenefitType.DISCOUNT} />} />
-          <Route path={Page.Cashback} element={<BenefitPage type={BenefitType.CASHBACK} />} />
-          <Route path={Page.PromoCode} element={<BenefitPage type={BenefitType.PROMO_CODE} />} />
+          <Route path={Page.Promotion} element={<PromotionPage />} />
+          <Route path={Page.Discount} element={<PromotionPage type={PromotionType.DISCOUNT} />} />
+          <Route path={Page.Cashback} element={<PromotionPage type={PromotionType.CASHBACK} />} />
+          <Route
+            path={Page.PromoCode}
+            element={<PromotionPage type={PromotionType.PROMO_CODE} />}
+          />
         </Route>
 
         <Route path={Page.LogIn} element={<LogInPage />} />

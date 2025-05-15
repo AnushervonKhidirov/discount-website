@@ -1,16 +1,16 @@
-.benefit_wrapper > div {
+.promotion_wrapper > div {
   display: grid;
   grid-template-areas:
-    'benefit_type benefit_type'
+    'promotion_type promotion_type'
     'company bank'
-    'benefit benefit'
+    'promotion promotion'
     'rating rating';
   grid-template-columns: 1fr max-content;
   gap: 1rem;
 }
 
-.benefit_wrapper > div::before,
-.benefit_wrapper > div::after {
+.promotion_wrapper > div::before,
+.promotion_wrapper > div::after {
   display: none !important;
 }
 
@@ -22,16 +22,16 @@
   grid-area: bank;
 }
 
-.benefit {
-  grid-area: benefit;
+.promotion {
+  grid-area: promotion;
 }
 
 .rating {
   grid-area: rating;
 }
 
-.benefit_type {
-  grid-area: benefit_type;
+.promotion_type {
+  grid-area: promotion_type;
   justify-self: self-end;
   margin: 0;
   cursor: default;

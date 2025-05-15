@@ -16,6 +16,6 @@ export enum Endpoint {
   Companies = 'http://localhost:4000/companies',
   UploadCompanyLogo = 'http://localhost:4000/companies/upload-logo/:id',
 
-  Benefit = 'http://localhost:4000/benefits/:id',
-  Benefits = 'http://localhost:4000/benefits',
+  Promotion = 'http://localhost:4000/promotions/:id',
+  Promotions = 'http://localhost:4000/promotions',
 }
