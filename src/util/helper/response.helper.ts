@@ -1,10 +1,11 @@
 import type { ReturnWithErr } from '@type/return-with-error.type';
+import type { HttpExceptionInstance } from '@type/common.type';
 
 import { CustomError } from '@error/custom.error';
 import { HttpError } from '@error/http.error';
 
-export function isHttpError(data: object | HttpError): data is HttpError {
-  return (data as HttpError).error !== undefined;
+export function isHttpException(data: object): data is HttpExceptionInstance {
+  return (data as HttpError).statusCode >= 300;
 }
 
 export function returnError<T>(err: unknown): ReturnWithErr<T> {
