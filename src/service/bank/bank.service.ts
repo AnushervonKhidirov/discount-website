@@ -1,22 +1,23 @@
 import type { Bank } from '@type/bank.type';
 import type { ReturnPromiseWithErr } from '@type/return-with-error.type';
+import type { HttpExceptionInstance } from '@type/common.type';
 
 import axios from 'axios';
 import { Endpoint } from '@constant/endpoint.constant';
 import { HttpError } from '@error/http.error';
-import { isHttpError, returnError } from '@helper/response.helper';
+import { isHttpException, returnError } from '@helper/response.helper';
 
 export class BankService {
   async get(id: number): ReturnPromiseWithErr<Bank> {
     try {
-      const { data } = await axios.get<Bank | HttpError>(
+      const { data } = await axios.get<Bank | HttpExceptionInstance>(
         Endpoint.Bank.replace(':id', id.toString()),
         {
           validateStatus: () => true,
         },
       );
 
-      if (isHttpError(data)) throw new HttpError(data.status, data.error, data.message);
+      if (isHttpException(data)) throw new HttpError(data);
 
       const bank = {
         ...data,
@@ -32,11 +33,11 @@ export class BankService {
 
   async getAll(): ReturnPromiseWithErr<Bank[]> {
     try {
-      const { data } = await axios.get<Bank[] | HttpError>(Endpoint.Banks, {
+      const { data } = await axios.get<Bank[] | HttpExceptionInstance>(Endpoint.Banks, {
         validateStatus: () => true,
       });
 
-      if (isHttpError(data)) throw new HttpError(data.status, data.error, data.message);
+      if (isHttpException(data)) throw new HttpError(data);
 
       const banks = data.map(bank => ({
         ...bank,

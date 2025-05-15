@@ -1,19 +1,42 @@
-import type { LoginData, Token } from '@type/auth.type';
+import type { LogInData, SignUpData, Token } from '@type/auth.type';
 import type { ReturnPromiseWithErr } from '@type/return-with-error.type';
+import type { HttpExceptionInstance } from '@type/common.type';
 
 import axios from 'axios';
 import { Endpoint } from '@constant/endpoint.constant';
 import { HttpError } from '@error/http.error';
-import { isHttpError, returnError } from '@helper/response.helper';
+import { isHttpException, returnError } from '@helper/response.helper';
 
 export class AuthService {
-  async signin(body: LoginData): ReturnPromiseWithErr<Token> {
+  async signUp(body: SignUpData): ReturnPromiseWithErr<Token> {
     try {
-      const { data: user } = await axios.post<Token | HttpError>(Endpoint.Signin, body, {
-        validateStatus: () => true,
-      });
+      const { data: user } = await axios.post<Token | HttpExceptionInstance>(
+        Endpoint.SignUp,
+        body,
+        {
+          validateStatus: () => true,
+        },
+      );
 
-      if (isHttpError(user)) throw new HttpError(user.status, user.error, user.message);
+      if (isHttpException(user)) throw new HttpError(user);
+
+      return [user, null];
+    } catch (err) {
+      return returnError(err);
+    }
+  }
+
+  async signIn(body: LogInData): ReturnPromiseWithErr<Token> {
+    try {
+      const { data: user } = await axios.post<Token | HttpExceptionInstance>(
+        Endpoint.SignIn,
+        body,
+        {
+          validateStatus: () => true,
+        },
+      );
+
+      if (isHttpException(user)) throw new HttpError(user);
 
       return [user, null];
     } catch (err) {
@@ -23,7 +46,7 @@ export class AuthService {
 
   async refreshToken(refreshToken: string): ReturnPromiseWithErr<Token> {
     try {
-      const { data: token } = await axios.post<Token | HttpError>(
+      const { data: token } = await axios.post<Token | HttpExceptionInstance>(
         Endpoint.RefreshToken,
         { refreshToken },
         {
@@ -31,7 +54,7 @@ export class AuthService {
         },
       );
 
-      if (isHttpError(token)) throw new HttpError(token.status, token.error, token.message);
+      if (isHttpException(token)) throw new HttpError(token);
 
       return [token, null];
     } catch (err) {

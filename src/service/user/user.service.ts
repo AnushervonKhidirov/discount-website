@@ -1,11 +1,12 @@
 import type { UpdateUserData, User } from '@type/user.type';
 import type { Token } from '@type/auth.type';
+import type { HttpExceptionInstance } from '@type/common.type';
 import type { ReturnPromiseWithErr } from '@type/return-with-error.type';
 
 import axios from 'axios';
 import { Endpoint } from '@constant/endpoint.constant';
 import { HttpError } from '@error/http.error';
-import { isHttpError, returnError } from '@helper/response.helper';
+import { isHttpException, returnError } from '@helper/response.helper';
 import { CookieService } from '@service/cookie/cookie.service';
 
 export class UserService {
@@ -15,12 +16,12 @@ export class UserService {
     try {
       const { accessToken } = this.cookieService.get<Token>(['accessToken']);
 
-      const { data } = await axios.get<User | HttpError>(Endpoint.UserMe, {
+      const { data } = await axios.get<User | HttpExceptionInstance>(Endpoint.UserMe, {
         headers: { Authorization: `Bearer ${accessToken}` },
         validateStatus: () => true,
       });
 
-      if (isHttpError(data)) throw new HttpError(data.status, data.error, data.message);
+      if (isHttpException(data)) throw new HttpError(data);
 
       const user = {
         ...data,
@@ -38,7 +39,7 @@ export class UserService {
     try {
       const { accessToken } = this.cookieService.get<Token>(['accessToken']);
 
-      const { data } = await axios.get<User | HttpError>(
+      const { data } = await axios.get<User | HttpExceptionInstance>(
         Endpoint.User.replace(':id', id.toString()),
         {
           headers: { Authorization: `Bearer ${accessToken}` },
@@ -46,7 +47,7 @@ export class UserService {
         },
       );
 
-      if (isHttpError(data)) throw new HttpError(data.status, data.error, data.message);
+      if (isHttpException(data)) throw new HttpError(data);
 
       const user = {
         ...data,
@@ -64,12 +65,12 @@ export class UserService {
     try {
       const { accessToken } = this.cookieService.get<Token>(['accessToken']);
 
-      const { data } = await axios.get<User[] | HttpError>(Endpoint.Users, {
+      const { data } = await axios.get<User[] | HttpExceptionInstance>(Endpoint.Users, {
         headers: { Authorization: `Bearer ${accessToken}` },
         validateStatus: () => true,
       });
 
-      if (isHttpError(data)) throw new HttpError(data.status, data.error, data.message);
+      if (isHttpException(data)) throw new HttpError(data);
 
       const users = data.map(user => ({
         ...user,
@@ -87,7 +88,7 @@ export class UserService {
     try {
       const { accessToken } = this.cookieService.get<Token>(['accessToken']);
 
-      const { data } = await axios.put<User | HttpError>(
+      const { data } = await axios.put<User | HttpExceptionInstance>(
         Endpoint.User.replace(':id', id.toString()),
         userDto,
         {
@@ -96,7 +97,7 @@ export class UserService {
         },
       );
 
-      if (isHttpError(data)) throw new HttpError(data.status, data.error, data.message);
+      if (isHttpException(data)) throw new HttpError(data);
 
       const user = {
         ...data,
@@ -114,7 +115,7 @@ export class UserService {
     try {
       const { accessToken } = this.cookieService.get<Token>(['accessToken']);
 
-      const { data } = await axios.delete<User | HttpError>(
+      const { data } = await axios.delete<User | HttpExceptionInstance>(
         Endpoint.User.replace(':id', id.toString()),
         {
           headers: { Authorization: `Bearer ${accessToken}` },
@@ -122,7 +123,7 @@ export class UserService {
         },
       );
 
-      if (isHttpError(data)) throw new HttpError(data.status, data.error, data.message);
+      if (isHttpException(data)) throw new HttpError(data);
 
       const user = {
         ...data,

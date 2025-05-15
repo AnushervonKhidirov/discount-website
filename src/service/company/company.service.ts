@@ -1,11 +1,12 @@
 import type { Company, UpdateCompanyData } from '@type/company.type';
 import type { Token } from '@type/auth.type';
 import type { ReturnPromiseWithErr } from '@type/return-with-error.type';
+import type { HttpExceptionInstance } from '@type/common.type';
 
 import axios from 'axios';
 import { Endpoint } from '@constant/endpoint.constant';
 import { HttpError } from '@error/http.error';
-import { isHttpError, returnError } from '@helper/response.helper';
+import { isHttpException, returnError } from '@helper/response.helper';
 import { CookieService } from '@service/cookie/cookie.service';
 
 export class CompanyService {
@@ -15,7 +16,7 @@ export class CompanyService {
     try {
       const { accessToken } = this.cookieService.get<Token>(['accessToken']);
 
-      const { data } = await axios.get<Company | HttpError>(
+      const { data } = await axios.get<Company | HttpExceptionInstance>(
         Endpoint.Company.replace(':id', id.toString()),
         {
           headers: { Authorization: `Bearer ${accessToken}` },
@@ -23,7 +24,7 @@ export class CompanyService {
         },
       );
 
-      if (isHttpError(data)) throw new HttpError(data.status, data.error, data.message);
+      if (isHttpException(data)) throw new HttpError(data);
 
       const company = {
         ...data,
@@ -41,12 +42,12 @@ export class CompanyService {
     try {
       const { accessToken } = this.cookieService.get<Token>(['accessToken']);
 
-      const { data } = await axios.get<Company[] | HttpError>(Endpoint.Companies, {
+      const { data } = await axios.get<Company[] | HttpExceptionInstance>(Endpoint.Companies, {
         headers: { Authorization: `Bearer ${accessToken}` },
         validateStatus: () => true,
       });
 
-      if (isHttpError(data)) throw new HttpError(data.status, data.error, data.message);
+      if (isHttpException(data)) throw new HttpError(data);
 
       const companies = data.map(company => ({
         ...company,
@@ -64,7 +65,7 @@ export class CompanyService {
     try {
       const { accessToken } = this.cookieService.get<Token>(['accessToken']);
 
-      const { data } = await axios.put<Company | HttpError>(
+      const { data } = await axios.put<Company | HttpExceptionInstance>(
         Endpoint.Company.replace(':id', id.toString()),
         companyDto,
         {
@@ -73,7 +74,7 @@ export class CompanyService {
         },
       );
 
-      if (isHttpError(data)) throw new HttpError(data.status, data.error, data.message);
+      if (isHttpException(data)) throw new HttpError(data);
 
       const company = {
         ...data,
@@ -94,7 +95,7 @@ export class CompanyService {
       const formData = new FormData();
       formData.append('file', file);
 
-      const { data } = await axios.post<Company | HttpError>(
+      const { data } = await axios.post<Company | HttpExceptionInstance>(
         Endpoint.UploadCompanyLogo.replace(':id', id.toString()),
         formData,
         {
@@ -103,7 +104,7 @@ export class CompanyService {
         },
       );
 
-      if (isHttpError(data)) throw new HttpError(data.status, data.error, data.message);
+      if (isHttpException(data)) throw new HttpError(data);
 
       const company = {
         ...data,
@@ -121,7 +122,7 @@ export class CompanyService {
     try {
       const { accessToken } = this.cookieService.get<Token>(['accessToken']);
 
-      const { data } = await axios.delete<Company | HttpError>(
+      const { data } = await axios.delete<Company | HttpExceptionInstance>(
         Endpoint.Company.replace(':id', id.toString()),
         {
           headers: { Authorization: `Bearer ${accessToken}` },
@@ -129,7 +130,7 @@ export class CompanyService {
         },
       );
 
-      if (isHttpError(data)) throw new HttpError(data.status, data.error, data.message);
+      if (isHttpException(data)) throw new HttpError(data);
 
       const company = {
         ...data,
