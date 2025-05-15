@@ -4,7 +4,7 @@ import type { Token } from '@type/auth.type';
 import { AuthService } from '@service/auth/auth.service';
 import { CookieService } from '@service/cookie/cookie.service';
 import { HttpError } from '@error/http.error';
-import { returnError, isHttpError } from './response.helper';
+import { returnError } from './response.helper';
 
 export const requestWithRefresh = async <T>(
   request: () => ReturnPromiseWithErr<T>,
@@ -13,23 +13,21 @@ export const requestWithRefresh = async <T>(
     const [response, err] = await request();
 
     if (err) {
-      if (err instanceof HttpError && err.status === 401) {
+      if (err instanceof HttpError && err.statusCode === 401) {
         const authService = new AuthService();
         const cookieService = new CookieService();
 
         const { refreshToken } = cookieService.get<Token>(['refreshToken']);
-        if (!refreshToken) throw new HttpError(401, 'Unauthorized', 'Token not found');
+        if (!refreshToken) {
+          throw new HttpError({
+            statusCode: 401,
+            error: 'Unauthorized',
+            message: 'Token not found',
+          });
+        }
 
         const [tokens, tokenErr] = await authService.refreshToken(refreshToken);
-        if (tokenErr) {
-          if (isHttpError(tokenErr) && tokenErr.status === 409) {
-            const [response, requestErr] = await request();
-            if (requestErr) throw requestErr;
-            return [response, null];
-          }
-
-          throw tokenErr;
-        }
+        if (tokenErr) throw tokenErr;
 
         cookieService.set(tokens);
 
