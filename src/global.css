@@ -11,8 +11,8 @@ body {
 }
 
 body:has(header) {
-  grid-template-areas: 'header' 'main';
-  grid-template-rows: max-content 1fr;
+  grid-template-areas: 'header' 'main' '.';
+  grid-template-rows: max-content 1fr 2em;
   gap: 1rem;
 }
 
