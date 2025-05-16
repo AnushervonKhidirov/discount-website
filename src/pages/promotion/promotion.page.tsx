@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useLocation, useNavigate } from 'react-router';
-import { PromotionService } from '@service/promotion/promotion.service';
-
 import { Tabs } from 'antd/es';
+
 import Grid from '@component/common/grid/grid';
 import Promotion from '@component/promotion/promotion';
 import Loader from '@component/common/loader/loader';
+
+import { PromotionService } from '@service/promotion/promotion.service';
 import { getKeyFromUrl } from '@helper/navigation.helper';
 
 import { tabs, pageToPromotionType } from './promotion.constant';
