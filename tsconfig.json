@@ -30,6 +30,7 @@
       "@error/*": ["./src/util/error/*"],
       "@helper/*": ["./src/util/helper/*"],
       "@store/*": ["./src/store/*"],
+      "@common/*": ["./src/component/common/*"],
       "@component/*": ["./src/component/*"],
       "@layout/*": ["./src/layout/*"]
     }
