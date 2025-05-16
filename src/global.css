@@ -16,7 +16,7 @@ body:has(header) {
   gap: 1rem;
 }
 
-body > *:not(header, main, footer) {
+body > *:not(header, main, footer, div, span) {
   display: none;
 }
 

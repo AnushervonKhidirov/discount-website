@@ -6,6 +6,7 @@ import HeaderLayout from '@layout/header/header.layout';
 import PromotionPage from '@pages/promotion/promotion.page';
 import LogInPage from '@pages/log-in/log-in.page';
 import SignUpPage from '@pages/sign-up/sign-up.page';
+import StorePage from '@pages/store/store.page';
 
 import { Page } from '@constant/link.constant';
 
@@ -18,7 +19,7 @@ function App() {
         <Routes>
           <Route element={<HeaderLayout />}>
             <Route path={Page.Promotion + '/*'} element={<PromotionPage />} />
-            <Route path={Page.Store + '/*'} element={<div>Store page</div>} />
+            <Route path={Page.Store + '/*'} element={<StorePage />} />
           </Route>
 
           <Route path={Page.LogIn} element={<LogInPage />} />
