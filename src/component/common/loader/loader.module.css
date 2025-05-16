@@ -1,0 +1,19 @@
+.loader {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  justify-items: center;
+  align-items: center;
+}
+
+.small {
+  font-size: 1em;
+}
+
+.medium {
+  font-size: 2em;
+}
+
+.large {
+  font-size: 4em;
+}
