@@ -34,8 +34,11 @@ const PromotionPage = () => {
   });
 
   function onTabChange(key: string) {
-    setType(pageToPromotionType.get(getKeyFromUrl(key)));
     navigation(key, { preventScrollReset: true });
+
+    setTimeout(() => {
+      setType(pageToPromotionType.get(getKeyFromUrl(key)));
+    }, 300);
   }
 
   return (
