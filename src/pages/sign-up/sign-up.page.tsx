@@ -17,15 +17,18 @@ const SignUpPage = () => {
 
   const onSubmit = async (values: SignUpData) => {
     if (values.password !== values.repeat_password) {
-      return api.error({ message: 'Wrong repeat password', description: 'Repeat password should match password!' });
+      return api.error({
+        message: 'Wrong repeat password',
+        description: 'Repeat password should match password!',
+      });
     }
-    
+
     const [token, err] = await authService.signUp(values);
-    
+
     if (err) return api.error({ message: err.error, description: err.message });
 
     cookieService.set(token);
-    navigate(Page.Home);
+    navigate(Page.Promotion);
   };
 
   return (

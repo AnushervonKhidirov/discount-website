@@ -20,7 +20,7 @@ const LogInPage = () => {
     if (err) return api.error({ message: err.error, description: err.message });
 
     cookieService.set(token);
-    navigate(Page.Home);
+    navigate(Page.Promotion);
   };
 
   return (
