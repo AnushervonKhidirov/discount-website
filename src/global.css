@@ -16,6 +16,10 @@ body:has(header) {
   gap: 1rem;
 }
 
+body > *:not(header, main, footer) {
+  display: none;
+}
+
 header {
   grid-area: header;
 }
