@@ -36,7 +36,7 @@ const HeaderLayout = () => {
       <Header />
 
       <main>
-        <Content>
+        <Content fullHeight>
           <Outlet />
         </Content>
       </main>
