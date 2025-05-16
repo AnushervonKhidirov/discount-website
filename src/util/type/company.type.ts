@@ -5,9 +5,8 @@ export type Company = {
   logoUrl: string | null;
   archived: boolean;
   verified: boolean;
+  categoryId: number;
   createdAt: Date;
   updatedAt: Date;
   userId: number;
 };
-
-export type UpdateCompanyData = Pick<Company, 'name' | 'about' | 'verified' | 'archived'>;
