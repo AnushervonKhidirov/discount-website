@@ -17,7 +17,7 @@ const AuthButtons: FC<AdditionalProps> = ({ className }) => {
   return (
     <div className={classNames(classes.auth_buttons, className)}>
       {user ? (
-        <ProfileBtn />
+        <ProfileBtn user={user} />
       ) : (
         <>
           <Button type="default">
