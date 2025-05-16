@@ -5,6 +5,11 @@
   gap: 1em;
 }
 
+.grid_pagination {
+  display: grid;
+  gap: 2em;
+}
+
 @media screen and (min-width: 769px) {
   .grid.xSmall {
     --columns: 5;
