@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
 import { Outlet } from 'react-router';
+import { useQuery } from '@tanstack/react-query';
 
 import { notification } from 'antd/es';
 import { UserService } from '@service/user/user.service';
@@ -13,34 +13,40 @@ import { requestWithRefresh } from '@helper/request.helper';
 const HeaderLayout = () => {
   const [api, context] = notification.useNotification();
   const { setUser } = useUserStore();
-
   const cookieService = new CookieService();
   const userService = new UserService();
-
   const { accessToken } = cookieService.get<{ accessToken: string }>(['accessToken']);
 
-  async function getUserInfo() {
-    const [user, err] = await requestWithRefresh(() => userService.getMyInfo());
-    if (err) return api.error({ message: err.error, description: err.message });
-    setUser(user);
-  }
+  const { isFetched } = useQuery({
+    initialData: null,
+    queryKey: ['userInfo'],
+    queryFn: async () => {
+      if (!accessToken) return null;
+      const [user, err] = await requestWithRefresh(() => userService.getMyInfo());
+      if (err) {
+        api.error({ message: err.error, description: err.message });
+        setUser(null);
+        return null;
+      }
 
-  useEffect(() => {
-    if (accessToken) getUserInfo();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accessToken]);
+      setUser(user);
+      return user;
+    },
+  });
 
   return (
-    <>
-      {context}
-      <Header />
+    isFetched && (
+      <>
+        {context}
+        <Header />
 
-      <main>
-        <Content fullHeight>
-          <Outlet />
-        </Content>
-      </main>
-    </>
+        <main>
+          <Content fullHeight>
+            <Outlet />
+          </Content>
+        </main>
+      </>
+    )
   );
 };
 
