@@ -3,6 +3,7 @@ import Logo from '../logo/logo';
 import Navigation from '../navigation/navigation';
 import AuthButtons from '../auth-buttons/auth-buttons';
 
+import { menuItems } from './header.constant';
 import classes from './header.module.css';
 
 const Header = () => {
@@ -10,7 +11,7 @@ const Header = () => {
     <header className={classes.header}>
       <Content className={classes.header_content}>
         <Logo className={classes.logo} />
-        <Navigation className={classes.navigation} />
+        <Navigation menuItems={menuItems} className={classes.navigation} />
         <AuthButtons className={classes.auth_buttons} />
       </Content>
     </header>
