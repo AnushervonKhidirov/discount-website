@@ -3,3 +3,7 @@
   width: 90vw;
   margin: auto;
 }
+
+.content.full_height {
+  height: 100%;
+}
