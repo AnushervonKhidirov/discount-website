@@ -1,7 +1,7 @@
-import Content from '../content/content';
-import Logo from '../logo/logo';
-import Navigation from '../navigation/navigation';
-import AuthButtons from '../auth-buttons/auth-buttons';
+import Content from '@common/content/content';
+import Logo from '@common/logo/logo';
+import Navigation from '@common/navigation/navigation';
+import AuthButtons from '@component/auth-buttons/auth-buttons';
 
 import { menuItems } from './header.constant';
 import classes from './header.module.css';

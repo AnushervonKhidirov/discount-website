@@ -5,7 +5,7 @@ import { isCashback } from '@type/promotion.type';
 
 import dayjs from 'dayjs';
 import { Card, Tag } from 'antd/es';
-import Rating from '@component/common/rating/rating';
+import Rating from '@common/rating/rating';
 
 import classNames from 'classnames';
 import classes from './promotion.module.css';

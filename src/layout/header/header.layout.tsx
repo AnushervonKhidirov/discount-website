@@ -2,12 +2,12 @@ import { Outlet } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
 
 import { notification } from 'antd/es';
+import Content from '@common/content/content';
+import Header from '@component/header/header';
+
 import { UserService } from '@service/user/user.service';
 import { CookieService } from '@service/cookie/cookie.service';
 import { useUserStore } from '@store/user.store';
-
-import Header from '@component/common/header/header';
-import Content from '@component/common/content/content';
 import { requestWithRefresh } from '@helper/request.helper';
 
 const HeaderLayout = () => {

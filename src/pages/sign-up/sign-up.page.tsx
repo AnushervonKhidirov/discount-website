@@ -1,8 +1,8 @@
 import type { SignUpData } from '@type/auth.type';
 
 import { useNavigate } from 'react-router';
-import { FormCard } from '@component/common/form-card/form-card';
 import { Form, Input, notification } from 'antd/es';
+import { FormCard } from '@common/form-card/form-card';
 
 import { AuthService } from '@service/auth/auth.service';
 import { CookieService } from '@service/cookie/cookie.service';

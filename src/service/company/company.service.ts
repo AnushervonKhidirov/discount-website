@@ -4,10 +4,10 @@ import type { ReturnPromiseWithErr } from '@type/return-with-error.type';
 import type { HttpExceptionInstance } from '@type/common.type';
 
 import axios from 'axios';
+import { CookieService } from '@service/cookie/cookie.service';
 import { Endpoint } from '@constant/endpoint.constant';
 import { HttpError } from '@error/http.error';
 import { isHttpException, returnError } from '@helper/response.helper';
-import { CookieService } from '@service/cookie/cookie.service';
 
 export class CompanyService {
   private readonly cookieService = new CookieService();

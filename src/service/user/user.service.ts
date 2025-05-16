@@ -1,13 +1,13 @@
-import type { UpdateUserData, User } from '@type/user.type';
+import type { User, UpdateUserData } from '@type/user.type';
 import type { Token } from '@type/auth.type';
-import type { HttpExceptionInstance } from '@type/common.type';
 import type { ReturnPromiseWithErr } from '@type/return-with-error.type';
+import type { HttpExceptionInstance } from '@type/common.type';
 
 import axios from 'axios';
+import { CookieService } from '@service/cookie/cookie.service';
 import { Endpoint } from '@constant/endpoint.constant';
 import { HttpError } from '@error/http.error';
 import { isHttpException, returnError } from '@helper/response.helper';
-import { CookieService } from '@service/cookie/cookie.service';
 
 export class UserService {
   private readonly cookieService = new CookieService();

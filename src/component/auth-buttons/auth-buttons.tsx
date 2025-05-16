@@ -6,8 +6,8 @@ import { NavLink } from 'react-router';
 import { Button } from 'antd/es';
 import { useUserStore } from '@store/user.store';
 import ProfileBtn from '../profile-btn/profile-btn';
-import { Page } from '@constant/link.constant';
 
+import { Page } from '@constant/link.constant';
 import classNames from 'classnames';
 import classes from './auth-buttons.module.css';
 
