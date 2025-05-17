@@ -16,3 +16,8 @@ export type HttpExceptionInstance = {
   message: string | string[];
   error?: string;
 };
+
+export type IdValueData = {
+  id: number;
+  value: string;
+};
