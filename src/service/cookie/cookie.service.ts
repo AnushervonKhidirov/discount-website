@@ -2,6 +2,8 @@ import type { Cookie } from '@type/common.type';
 
 export class CookieService {
   set(cookie: Cookie) {
+    this.delete(Object.keys(cookie));
+
     for (const name in cookie) {
       document.cookie = `${name}=${cookie[name]}`;
     }
