@@ -13,9 +13,16 @@ export enum Endpoint {
   UploadBankLogo = 'http://localhost:4000/banks/upload-logo/:id',
 
   Company = 'http://localhost:4000/companies/:id',
+  CompanyArchive = 'http://localhost:4000/companies/archive/:id',
   Companies = 'http://localhost:4000/companies',
   UploadCompanyLogo = 'http://localhost:4000/companies/upload-logo/:id',
 
   Promotion = 'http://localhost:4000/promotions/:id',
   Promotions = 'http://localhost:4000/promotions',
+
+  Country = 'http://localhost:4000/countries/:id',
+  Countries = 'http://localhost:4000/countries',
+
+  Category = 'http://localhost:4000/categories/:id',
+  Categories = 'http://localhost:4000/categories',
 }
