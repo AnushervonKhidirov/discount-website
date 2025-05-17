@@ -1,4 +1,4 @@
-import type { Company, UpdateCompany } from '@type/company.type';
+import type { Company, CreateCompany, UpdateCompany } from '@type/company.type';
 import type { Token } from '@type/auth.type';
 import type { ReturnPromiseWithErr } from '@type/return-with-error.type';
 import type { HttpExceptionInstance } from '@type/common.type';
@@ -50,6 +50,33 @@ export class CompanyService {
       }));
 
       return [companies, null];
+    } catch (err) {
+      return returnError(err);
+    }
+  }
+
+  async create(companyDto: CreateCompany): ReturnPromiseWithErr<Company> {
+    try {
+      const { accessToken } = this.cookieService.get<Token>(['accessToken']);
+
+      const { data } = await axios.post<Company | HttpExceptionInstance>(
+        Endpoint.Companies,
+        companyDto,
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+          validateStatus: () => true,
+        },
+      );
+
+      if (isHttpException(data)) throw new HttpError(data);
+
+      const company = {
+        ...data,
+        createdAt: new Date(data.createdAt),
+        updatedAt: new Date(data.updatedAt),
+      };
+
+      return [company, null];
     } catch (err) {
       return returnError(err);
     }
