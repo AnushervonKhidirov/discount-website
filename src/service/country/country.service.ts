@@ -1,4 +1,4 @@
-import type { Country } from '@type/country';
+import type { Country } from '@type/country.type';
 import type { ReturnPromiseWithErr } from '@type/return-with-error.type';
 import type { HttpExceptionInstance } from '@type/common.type';
 
