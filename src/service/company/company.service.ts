@@ -1,4 +1,4 @@
-import type { Company, UpdateCompanyData } from '@type/company.type';
+import type { Company, UpdateCompany } from '@type/company.type';
 import type { Token } from '@type/auth.type';
 import type { ReturnPromiseWithErr } from '@type/return-with-error.type';
 import type { HttpExceptionInstance } from '@type/common.type';
@@ -14,12 +14,9 @@ export class CompanyService {
 
   async get(id: number): ReturnPromiseWithErr<Company> {
     try {
-      const { accessToken } = this.cookieService.get<Token>(['accessToken']);
-
       const { data } = await axios.get<Company | HttpExceptionInstance>(
         Endpoint.Company.replace(':id', id.toString()),
         {
-          headers: { Authorization: `Bearer ${accessToken}` },
           validateStatus: () => true,
         },
       );
@@ -40,10 +37,7 @@ export class CompanyService {
 
   async getAll(): ReturnPromiseWithErr<Company[]> {
     try {
-      const { accessToken } = this.cookieService.get<Token>(['accessToken']);
-
       const { data } = await axios.get<Company[] | HttpExceptionInstance>(Endpoint.Companies, {
-        headers: { Authorization: `Bearer ${accessToken}` },
         validateStatus: () => true,
       });
 
@@ -61,7 +55,7 @@ export class CompanyService {
     }
   }
 
-  async update(id: number, companyDto: UpdateCompanyData): ReturnPromiseWithErr<Company> {
+  async update(id: number, companyDto: UpdateCompany): ReturnPromiseWithErr<Company> {
     try {
       const { accessToken } = this.cookieService.get<Token>(['accessToken']);
 
@@ -118,12 +112,12 @@ export class CompanyService {
     }
   }
 
-  async delete(id: number): ReturnPromiseWithErr<Company> {
+  async archive(id: number): ReturnPromiseWithErr<Company> {
     try {
       const { accessToken } = this.cookieService.get<Token>(['accessToken']);
 
-      const { data } = await axios.delete<Company | HttpExceptionInstance>(
-        Endpoint.Company.replace(':id', id.toString()),
+      const { data } = await axios.patch<Company | HttpExceptionInstance>(
+        Endpoint.CompanyArchive.replace(':id', id.toString()),
         {
           headers: { Authorization: `Bearer ${accessToken}` },
           validateStatus: () => true,
