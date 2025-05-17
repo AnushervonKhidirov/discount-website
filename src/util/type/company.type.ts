@@ -1,3 +1,6 @@
+import { Category } from './category.type';
+import type { Country } from './country.type';
+
 export type Company = {
   id: number;
   name: string;
@@ -10,6 +13,8 @@ export type Company = {
   createdAt: Date;
   updatedAt: Date;
   userId: number;
+  countries: Country[];
+  category: Category;
 };
 
 export type CreateCompany = Pick<Company, 'name' | 'about' | 'countryIds' | 'categoryId'>;
