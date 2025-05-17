@@ -9,18 +9,16 @@ import { returnError } from './response.helper';
 export const requestWithRefresh = async <T>(
   request: () => ReturnPromiseWithErr<T>,
 ): ReturnPromiseWithErr<T> => {
+  const authService = new AuthService();
+  const cookieService = new CookieService();
+
   try {
     const [response, err] = await request();
 
     if (err) {
       if (err instanceof HttpError && err.statusCode === 401) {
-        const authService = new AuthService();
-        const cookieService = new CookieService();
-
         const { refreshToken } = cookieService.get<Token>(['refreshToken']);
         if (!refreshToken) {
-          cookieService.delete(['accessToken', 'refreshToken']);
-
           throw new HttpError({
             statusCode: 401,
             error: 'Unauthorized',
@@ -29,11 +27,7 @@ export const requestWithRefresh = async <T>(
         }
 
         const [tokens, tokenErr] = await authService.refreshToken(refreshToken);
-        if (tokenErr) {
-          cookieService.delete(['accessToken', 'refreshToken']);
-          throw tokenErr;
-        }
-
+        if (tokenErr) throw tokenErr;
         cookieService.set(tokens);
 
         const [response, requestErr] = await request();
@@ -46,6 +40,7 @@ export const requestWithRefresh = async <T>(
 
     return [response, null];
   } catch (err) {
+    cookieService.delete(['accessToken', 'refreshToken']);
     return returnError(err);
   }
 };
