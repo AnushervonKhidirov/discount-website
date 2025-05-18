@@ -1,0 +1,20 @@
+.create_company_page {
+  display: grid;
+  height: 100%;
+  grid-template-areas: 'content' 'steps';
+  grid-template-rows: 1fr max-content;
+  gap: 2rem;
+}
+
+.content {
+  grid-area: content;
+}
+
+.steps {
+  grid-area: steps;
+}
+
+.step_2_wrapper {
+  grid-template-columns: 1fr;
+}
+
