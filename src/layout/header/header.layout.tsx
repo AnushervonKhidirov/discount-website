@@ -11,7 +11,7 @@ import { useUserStore } from '@store/user.store';
 import { requestWithRefresh } from '@helper/request.helper';
 
 const HeaderLayout = () => {
-  const [api, context] = notification.useNotification();
+  const [_, context] = notification.useNotification();
   const { setUser } = useUserStore();
   const cookieService = new CookieService();
   const userService = new UserService();
@@ -24,8 +24,7 @@ const HeaderLayout = () => {
       if (!accessToken) return null;
       const [user, err] = await requestWithRefresh(() => userService.getMyInfo());
       if (err) {
-        api.error({ message: err.error, description: err.message });
-        setUser(null);
+        notification.error({ message: err.error, description: err.message });
         return null;
       }
 
